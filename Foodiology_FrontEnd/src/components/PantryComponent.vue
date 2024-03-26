@@ -2,14 +2,15 @@
   <div class="add-ingredients">
     <h1>Add Ingredients</h1>
     <form @submit.prevent="addIngredient">
-      <input type="text" v-model="newIngredient" placeholder="Enter ingredient" />
+      <input type="text" v-model="newIngredient.name" placeholder="Enter ingredient" />
+      <input type="text" v-model="newIngredient.amount" placeholder="Enter amount" />
       <button type="submit">Add</button>
     </form>
     <ul>
-        <li v-for="(ingredient, index) in ingredients" :key="index">
-    {{ ingredient }}
-    <button @click="deleteIngredient(index)">Delete</button>
-  </li>
+      <li v-for="(ingredient, index) in ingredients" :key="index">
+        {{ ingredient.name }} - {{ ingredient.amount }}
+        <button @click="deleteIngredient(index)">Delete</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -18,38 +19,41 @@
 export default {
   data() {
     return {
-      newIngredient: '',
+      newIngredient: { name: '', amount: '' },
       ingredients: [],
     };
   },
   methods: {
     addIngredient() {
-      if (this.newIngredient.trim()) {
-        this.ingredients.push(this.newIngredient.trim());
-        this.newIngredient = '';
-        // Store the updated ingredients list in local storage
+      if (this.newIngredient.name.trim() && this.newIngredient.amount.trim()) {
+        this.ingredients.push({
+          name: this.newIngredient.name.trim(),
+          amount: this.newIngredient.amount.trim()
+        });
+        this.newIngredient = { name: '', amount: '' };
         localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
       }
     },
     deleteIngredient(index) {
-    this.ingredients.splice(index, 1);
-    localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
-  },
+      this.ingredients.splice(index, 1);
+      localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
+    },
   },
   created() {
-  // Load the stored ingredients from local storage
-  const storedIngredients = localStorage.getItem('ingredients');
-  if (storedIngredients) {
-    this.ingredients = JSON.parse(storedIngredients);
-  }
-},
+    const storedIngredients = localStorage.getItem('ingredients');
+    if (storedIngredients) {
+      this.ingredients = JSON.parse(storedIngredients);
+    }
+  },
 };
 </script>
+
 
 <style scoped>
 .add-ingredients {
   max-width: 600px;
-  margin: 0 auto; /* Center align the box */
+  margin: 0 auto;
+  /* Center align the box */
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;

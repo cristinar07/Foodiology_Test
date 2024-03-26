@@ -16,6 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+USE_TZ = True
+TIME_ZONE = 'America/New_York'  # Set to your desired time zone
 
 # Application definition
 
@@ -40,7 +42,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [

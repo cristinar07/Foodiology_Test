@@ -14,7 +14,21 @@
         <p class="text-gray-600">{{ post.created_at_formatted }}</p>
     </div>
 
-    <p>{{ post.body }}</p>
+    <!-- Displaying the recipe details -->
+    <div class="recipe-details">
+        <h2 class="font-bold text-xl">{{ post.recipeName }}</h2>
+        <div>
+            <h3 class="font-semibold">Ingredients:</h3>
+            <p>{{ post.ingredients }}</p>
+        </div>
+        <div>
+            <h3 class="font-semibold">Steps:</h3>
+            <p>{{ post.steps }}</p>
+        </div>
+        <div v-if="post.image">
+            <img :src="post.image" alt="Recipe Image" class="max-w-full h-auto rounded-lg">
+        </div>
+    </div>
 
     <div class="my-6 flex justify-between">
         <div class="flex space-x-6">

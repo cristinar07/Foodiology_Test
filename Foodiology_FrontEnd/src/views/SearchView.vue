@@ -1,9 +1,6 @@
 <template>
-  <div class="grid grid-cols-12 gap-3">
-    <div class="pantry-left col-span-3">
-      <PantryComponent />
-    </div>
-    <div class="search-center col-span-6">
+  <div class="grid grid-cols-6 gap-3">
+    <div class="search-left col-span-4">
       <div class="bg-white border border-gray-200 rounded-lg">
         <div class="p-4 flex space-x-4">
           <div class="recipe-search-bar">
@@ -76,7 +73,8 @@
       </div>
     </div>
 
-    <div class="recommendations-right col-span-3">
+    <div class="recommendations-right col-span-2">
+      <PantryComponent />
       <RecommendedRecipes />
       <TrendingRecipes />
     </div>
